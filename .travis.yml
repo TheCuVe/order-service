@@ -6,6 +6,9 @@ sudo: required
 services:
   - docker
 
+before_install:
+  - pip install -e .
+
 script:
   - flake8
   - pytest -vs
