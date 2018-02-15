@@ -10,17 +10,20 @@ def requirements_from_file(requirements_path: str):
 
 
 setup(
-    name='cuve',
-    description='',
-    url='',
+    name='cuve-order-service',
+    description='CuVe Order Service',
+    url='https://github.com/TheCuVe/order-service',
     version='0.0.1',
 
     zip_safe=True,
     include_package_data=True,
     packages=find_packages(exclude=['tests']),
+
     install_requires=requirements_from_file('./requirements.txt'),
     tests_requires=requirements_from_file('./requirements.dev.txt'),
+
     entry_points={
-        'console_scripts': ['cuve = cuve.__main__:cli'],
+        'console_scripts': ['cuve.order = cuve.order_service.__main__:cli'],
     },
+    namespace=['cuve'],
 )

@@ -10,13 +10,20 @@ services:
 
   api:
     build: .
+    image: cuve/order
 
     ports:
       - 8080:8080
     links:
       - postgres
     volumes:
-      - .:/app
+      - ./cuve:/app/cuve
+      - ./etc:/app/etc
+      - ./tests:/app/tests
+
+      - ./setup.py:/app/setup.py
+      - ./requierments.txt:/app/requierments.txt
+      - ./requierments.dev.txt:/app/requierments.dev.txt
 
     stdin_open: true
     tty: true

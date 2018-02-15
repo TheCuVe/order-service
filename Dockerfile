@@ -11,5 +11,4 @@ COPY . /app
 WORKDIR /app
 
 RUN pip install -e .
-
-CMD cuve server
+CMD cuve.order --config /app/etc/config/development.yml server --host 0.0.0.0 --port 8080

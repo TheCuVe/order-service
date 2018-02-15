@@ -1,6 +1,6 @@
 from aiohttp import web
 
-from cuve.db.tables import account
+from cuve.order_service.db.tables import account
 
 from .schemas import RegistrationSchema
 
