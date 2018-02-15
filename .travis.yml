@@ -1,0 +1,7 @@
+sudo: required
+services:
+  - docker
+
+script:
+  - docker build -t cuve/order-service .
+  - docker run --rm -it flake8 && py.test -vs
