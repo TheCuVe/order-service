@@ -1,7 +1,14 @@
+lang: python
+python: "3.6"
+
 sudo: required
+
 services:
   - docker
 
 script:
+  - flake8
+  - pytest -vs
+
+after_success:
   - docker build -t cuve/order-service .
-  - docker run --rm -it flake8 && py.test -vs
