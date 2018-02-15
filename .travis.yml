@@ -6,7 +6,7 @@ sudo: required
 services:
   - docker
 
-install: pip install --user -r requirements.txt -r requirements.dev.txt
+install: pip install -r requirements.txt -r requirements.dev.txt
 script:
   - flake8
   - pytest -vs
