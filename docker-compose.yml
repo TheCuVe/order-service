@@ -22,10 +22,9 @@ services:
       - ./etc:/app/etc
       - ./tests:/app/tests
 
-      # FIXME: Creates directory on mount
-      # - ./setup.py:/app/setup.py
-      # - ./requierments.txt:/app/requierments.txt
-      # - ./requierments.dev.txt:/app/requierments.dev.txt
+      - ./setup.py:/app/setup.py
+      - ./requirements.txt:/app/requirements.txt
+      - ./requirements.dev.txt:/app/requirements.dev.txt
 
     stdin_open: true
     tty: true
