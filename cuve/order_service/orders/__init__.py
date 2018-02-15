@@ -15,6 +15,7 @@ def setup_orders_routing(app):
 
     app.router.add_get(order_base_url, search_orders)
     app.router.add_post(order_base_url, create_order)
+
     app.router.add_get(order_url, show_order)
     app.router.add_put(order_url, update_order)
 
