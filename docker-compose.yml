@@ -21,10 +21,12 @@ services:
       - ./cuve:/app/cuve
       - ./etc:/app/etc
       - ./tests:/app/tests
+      - ./alembic:/app/alembic
 
       - ./setup.py:/app/setup.py
       - ./requirements.txt:/app/requirements.txt
       - ./requirements.dev.txt:/app/requirements.dev.txt
+      - ./alembic.ini:/app/alembic.ini
 
     stdin_open: true
     tty: true
