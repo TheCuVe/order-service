@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=cuve
+      - POSTGRES_PASSWORD=cuve
+      - POSTGRES_DB=cuve
+
+  api:
+    build: .
+
+    ports:
+      - 8080:8080
+    links:
+      - postgres
+    volumes:
+      - .:/app
+
+    stdin_open: true
+    tty: true

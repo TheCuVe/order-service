@@ -1,0 +1,4 @@
+pytest
+pytest-aiohttp
+flake8
+mypy
