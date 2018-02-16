@@ -1,0 +1,11 @@
+# Testing
+pytest
+pytest-aiohttp
+
+# Lint
+flake8
+mypy
+
+# Migrations
+alembic
+psycopg2

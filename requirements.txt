@@ -1,0 +1,9 @@
+aiohttp==2.3.10
+
+SQLAlchemy==1.2.2
+aiopg==0.13.2
+
+marshmallow==2.15.0
+
+pyyaml==3.12
+click==6.7

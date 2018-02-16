@@ -1,0 +1,22 @@
+language: python
+python: "3.6"
+
+sudo: required
+
+services:
+  - docker
+  - postgresql
+
+install:
+  - pip install -r requirements.txt -r requirements.dev.txt
+  - pip install -e .
+
+before_script:
+  - psql -c 'create database cuve;'  -U postgres
+
+script:
+  - flake8
+  - pytest -vs --app-config ./etc/config/development.yml
+
+after_success:
+  - docker build -t cuve/order-service .
