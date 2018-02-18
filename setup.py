@@ -8,7 +8,6 @@ def requirements_from_file(requirements_path: str):
         return requirements.readlines()
 
 
-
 setup(
     name='cuve-order-service',
     description='CuVe Order Service',

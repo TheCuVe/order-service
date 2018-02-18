@@ -21,20 +21,14 @@ company = sa.Table(
 account = sa.Table(
     'accounts', metadata,
     sa.Column('id', sa.types.Integer, primary_key=True),
-    RequiredColumn('company_id', sa.types.Integer, sa.schema.ForeignKey('companies.id')),
+    RequiredColumn('company_id', sa.types.Integer,
+                   sa.schema.ForeignKey('companies.id')),
     RequiredColumn('email', sa.types.String, unique=True),
     RequiredColumn('first_name', sa.types.String),
     RequiredColumn('last_name', sa.types.String),
     RequiredColumn('password', sa.types.String),
 )
 
-# company_account_relation = sa.Table(
-#     'companies_accounts', metadata,
-#     sa.Column('account_id', sa.types.Integer, sa.schema.ForeignKey('account.id')),
-#     sa.Column('company_id', sa.types.Integer, sa.schema.ForeignKey('companies.id')),
-#     RequiredColumn('role', sa.types.Enum(*COMPANY_ROLES)),
-#     sa.schema.PrimaryKeyConstraint('company_id', 'account_id'),
-# )
 
 software = sa.Table(
     'software', metadata,

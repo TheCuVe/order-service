@@ -1,10 +1,9 @@
 from aiohttp import web
-from typing import Dict, Any
+from typing import Dict
 
 from .db import setup_db
 from .auth import auth_middleware
 
-from .accounts import accounts_subapp_factory
 from .orders import setup_orders_routing
 
 

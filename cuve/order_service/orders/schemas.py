@@ -1,5 +1,6 @@
 import marshmallow as ma
 
+
 class Software(ma.Schema):
     id = ma.fields.Integer(required=True)
     version = ma.fields.Integer(required=True)

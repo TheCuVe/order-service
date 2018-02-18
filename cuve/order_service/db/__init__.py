@@ -1,5 +1,4 @@
 from aiopg.sa import create_engine
-from .tables import account, company
 
 
 async def _on_app_startup(app):
@@ -10,8 +9,6 @@ async def _on_app_startup(app):
 async def _on_app_cleanup(app):
     app['db'].close()
     await app['db'].wait_closed()
-
-
 
 
 def setup_db(app):

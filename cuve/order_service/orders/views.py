@@ -2,10 +2,11 @@ from aiohttp import web
 
 from cuve.order_service.auth import auth_required
 from cuve.order_service.db.tables import (
-    software_order, software_order_item, software
+    software_order
 )
 
 from .schemas import UpdateOrderSchema
+
 
 @auth_required
 async def create_order(request):
@@ -39,18 +40,13 @@ async def order_update_software(request):
     pass
 
 
-
 @auth_required
 async def update_order(request):
     """ Update order with software
     """
     request_schema = UpdateOrderSchema(strict=True)
     payload = request_schema.load(await request.json()).data
-
-
-
     return web.json_response(payload)
-
 
 
 @auth_required

@@ -2,6 +2,7 @@ from aiohttp import web
 
 from .views import login, logout, get_user, register
 
+
 def accounts_subapp_factory():
     app = web.Application()
 

@@ -47,21 +47,16 @@ def create_database(ctx: Any) -> None:
 
     async def _async_create(loop, conf):
         db = await create_engine(**conf, loop=loop)
-        tables = [ CreateTable(table).compile(db)
-                   for table in (
-                           metadata.tables['companies'],
-                           metadata.tables['accounts'],
-                           metadata.tables['software'],
-                           metadata.tables['software_orders'],
-                           metadata.tables['software_order_items'],
-                   ) ]
+        tables = [CreateTable(table).compile(db)
+                  for table in (metadata.tables['companies'],
+                                metadata.tables['accounts'],
+                                metadata.tables['software'],
+                                metadata.tables['software_orders'],
+                                metadata.tables['software_order_items'])]
 
         async with db.acquire() as conn:
             for table_create_stmt in tables:
-                try:
-                    await conn.execute(table_create_stmt.string)
-                except:
-                    pass
+                await conn.execute(table_create_stmt.string)
 
         db.close()
         await db.wait_closed()
