@@ -7,16 +7,18 @@ services:
   - docker
   - postgresql
 
+before_script:
+  - psql -c 'create database cuve;'  -U postgres
+
 install:
   - pip install -r requirements.txt -r requirements.dev.txt
   - pip install -e .
 
-before_script:
-  - psql -c 'create database cuve;'  -U postgres
+jobs:
+  include:
+    - stage: lint and test
+    - script: flake8
+    - script: pytest -vs --config=./etc/config/travis.yml
 
-script:
-  - flake8
-  - pytest -vs --app-config ./etc/config/development.yml
-
-after_success:
-  - docker build -t cuve/order-service .
+    - stage: build
+    - script: docker build -t cuve/order-service .
