@@ -10,7 +10,7 @@ from .views import (search_orders,
 
 
 def setup_orders_routing(app: web.Application) -> None:
-    order_base_url = '/api/v1.0/orders/'
+    order_base_url = '/api/v1/orders/'
     order_url = order_base_url + '{order_id:\d+}'
 
     app.router.add_get(order_base_url, search_orders)

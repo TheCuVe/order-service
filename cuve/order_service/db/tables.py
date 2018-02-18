@@ -4,8 +4,6 @@ import sqlalchemy as sa
 RequiredColumn = partial(sa.Column, nullable=False)
 metadata = sa.MetaData()
 
-COMPANY_ROLES = 'owner', 'accountant', 'manager'
-
 company = sa.Table(
     'companies', metadata,
     sa.Column('id', sa.types.Integer, primary_key=True),

@@ -7,7 +7,7 @@ from .auth import auth_middleware
 from .orders import setup_orders_routing
 
 
-API_URL_PREFIX = '/api/v1.0'
+API_URL_PREFIX = '/api/v1'
 
 
 def application_factory(config: Dict, loop) -> web.Application:
@@ -20,7 +20,6 @@ def application_factory(config: Dict, loop) -> web.Application:
     app['config'] = config
 
     setup_db(app)
-
     setup_orders_routing(app)
 
     return app
