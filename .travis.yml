@@ -18,7 +18,7 @@ jobs:
   include:
     - stage: lint and test
     - script: flake8
-    - script: pytest -vs --config=./etc/config/travis.yml
+    - script: pytest -vs --config=./etc/config/travis.yml --createdb
 
     - stage: build
     - script: docker build -t cuve/order-service .

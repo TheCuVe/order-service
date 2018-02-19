@@ -3,8 +3,6 @@ from aiohttp import web
 from cuve.order_service.auth import auth_required
 from cuve.order_service.db import tables, transaction
 
-from .schemas import SoftwareOrder
-
 
 @auth_required
 async def search_orders(request):
@@ -49,6 +47,6 @@ async def order_update_software(request):
 async def update_order(request):
     """ Update order with software
     """
-    request_schema = UpdateOrderSchema(strict=True)
-    payload = request_schema.load(await request.json()).data
-    return web.json_response(payload)
+    # request_schema = UpdateOrderSchema(strict=True)
+    # payload = request_schema.load(await request.json()).data
+    return web.json_response({'result': 'ok'})

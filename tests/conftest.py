@@ -1,7 +1,9 @@
 import pytest
 import factory
+import asyncio
 
 from cuve.order_service.db import transaction, tables
+from cuve.order_service.db.helpers import async_create_database
 from cuve.order_service.app import application_factory
 from cuve.order_service.config import load_config, ConfigSchema
 
@@ -9,6 +11,19 @@ from cuve.order_service.config import load_config, ConfigSchema
 def pytest_addoption(parser):
     parser.addoption('--config', action="store",
                      default='./etc/config/development.yml')
+    parser.addoption('--createdb', action="store_true",
+                     default=False)
+
+
+def pytest_configure(config):
+    """ Create database if '--fakedb' option provided
+    """
+    if not config.getoption('--createdb'):
+        return
+
+    loop = asyncio.get_event_loop()
+    config = load_config(ConfigSchema, config.getoption('--config'))
+    loop.run_until_complete(async_create_database(loop, config['database']))
 
 
 @pytest.fixture
@@ -40,7 +55,7 @@ def transaction_auto_rollback(app):
 
 @pytest.fixture
 def company_factory(app):
-    """ Create fake company
+    """ Creates factory for creating fake companies
     """
     class CompanyFactory(factory.Factory):
         name = factory.Faker('company')
@@ -62,21 +77,21 @@ def company_factory(app):
 
 
 @pytest.fixture
-def account(app, company):
-    """ Create fake user account
+def account_factory(app, company_factory):
+    """ Creates factory for creating fake companies
     """
     pass
 
 
 @pytest.fixture
-def software(app, company):
-    """ Create fake software
+def software_factory(app, company_factory):
+    """ Creates factory for creating fake software
     """
     pass
 
 
 @pytest.fixture
-def software_order(app, account):
-    """ Create fake software order
+def software_order_factory(app, account_factory):
+    """ Creates factory for creating fake software orders
     """
     pass
