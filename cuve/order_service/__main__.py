@@ -5,13 +5,10 @@ import asyncio
 import aiohttp
 import click
 
-from sqlalchemy.schema import CreateTable
-from aiopg.sa import create_engine
-
 from .app import application_factory
-from .db.tables import metadata
 
 from .config import load_config, ConfigSchema
+from .db.helpers import async_create_database
 
 
 @click.group()
@@ -39,36 +36,9 @@ def server(ctx: Any, host: str, port: int) -> None:
 @cli.command(help="Creates database from metadata")
 @click.pass_context
 def create_database(ctx: Any) -> None:
-    """ Need fixes:
-    * correct way to retain creation order
-    * remove try/except
-
-    """
-
-    async def _async_create(loop, conf):
-        db = await create_engine(**conf, loop=loop)
-        tables = [ CreateTable(table).compile(db)
-                   for table in (
-                           metadata.tables['companies'],
-                           metadata.tables['accounts'],
-                           metadata.tables['software'],
-                           metadata.tables['software_orders'],
-                           metadata.tables['software_order_items'],
-                   ) ]
-
-        async with db.acquire() as conn:
-            for table_create_stmt in tables:
-                try:
-                    await conn.execute(table_create_stmt.string)
-                except:
-                    pass
-
-        db.close()
-        await db.wait_closed()
-
     ctx.obj['loop'].run_until_complete(
-        _async_create(ctx.obj['loop'],
-                      ctx.obj['config']['database'])
+        async_create_database(ctx.obj['loop'],
+                              ctx.obj['config']['database'])
     )
 
 

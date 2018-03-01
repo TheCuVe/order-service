@@ -1,6 +1,7 @@
 # Testing
 pytest
 pytest-aiohttp
+factory_boy
 
 # Lint
 flake8

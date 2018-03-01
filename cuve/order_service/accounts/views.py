@@ -1,8 +1,8 @@
 from aiohttp import web
 
-from cuve.order_service.db.tables import account
+# from cuve.order_service.db.tables import account
+# from .schemas import RegistrationSchema
 
-from .schemas import RegistrationSchema
 
 async def login(request):
     return web.Response(text='OK')

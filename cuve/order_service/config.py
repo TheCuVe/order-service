@@ -7,6 +7,7 @@ import marshmallow as ma
 # Config schemas
 #
 
+
 class DatabaseSection(ma.Schema):
     host = ma.fields.String(required=True)
     port = ma.fields.Integer(default=5432)
@@ -21,7 +22,6 @@ class DatabaseSection(ma.Schema):
 
 class ConfigSchema(ma.Schema):
     database = ma.fields.Nested(DatabaseSection, required=True)
-
 
 #
 # Config loader

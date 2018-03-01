@@ -1,11 +1,10 @@
-from collections import namedtuple
 from functools import wraps
 
 from sqlalchemy import sql
-
 from aiohttp.web import middleware, HTTPUnauthorized
 
 from .db.tables import company, account
+
 
 @middleware
 async def auth_middleware(request, handler):
